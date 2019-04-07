@@ -1,5 +1,5 @@
 package main
-import 	("time"
+import	("time"
 	"fmt"
 	"os"
 	"strings"
@@ -66,16 +66,7 @@ func ServeCustomer(cash *Cashier,cust *Customer,duration int,cashs *Cashiers){
 	cashs.cashiers<-cash //Add Cashier into free list
 }
 
-func main(){
-
-	var Customers,Cashiers,ServiceTime int
-	args:=os.Args
-	if(len(args)<3){
-		panic("command line arguments Not found..:)")
-	}
-	Customers,_=strconv.Atoi(strings.Split(args[2],"=")[1])
-	Cashiers,_=strconv.Atoi(strings.Split(args[1],"=")[1])
-	ServiceTime,_=strconv.Atoi(strings.Split(args[3],"=")[1])
+func SimulateBank(Customers int,Cashiers int,ServiceTime int){
 	customerQueue:=NewCustomerQueue(Customers)
 	cashiers:=GetCashiers(Cashiers)
 	fmt.Println(time.Now().Format("2006-01-02 15:04:05 "),"--> Bank Simulation Started")
@@ -90,5 +81,18 @@ func main(){
 
 	}
 	fmt.Println(time.Now().Format("2006-01-02 15:04:05")," --> Bank Simulated Ended")
+
+}
+func main(){
+
+	var Customers,Cashiers,ServiceTime int
+	args:=os.Args
+	if(len(args)<3){
+		panic("command line arguments Not found..:)")
+	}
+	Customers,_=strconv.Atoi(strings.Split(args[2],"=")[1])
+	Cashiers,_=strconv.Atoi(strings.Split(args[1],"=")[1])
+	ServiceTime,_=strconv.Atoi(strings.Split(args[3],"=")[1])
+	SimulateBank(Customers,Cashiers,ServiceTime)
 }
 

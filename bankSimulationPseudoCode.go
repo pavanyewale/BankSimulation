@@ -42,4 +42,9 @@ NewUnservedCustomerQueue()
 StartCashierWork(Cashier,UnservedCustomerQueue)
 }
 
-
+func main(){
+	customers:=NewUnservedCustomerQueue(NoofCustomers)
+	for i:=1;i<NoOfCashiers;i++{
+	go StartCashierWork(NewCashier(i),&customers)
+}
+}

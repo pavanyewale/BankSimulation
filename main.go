@@ -60,7 +60,7 @@ func GetCashiers(NoOfCashiers int) *Cashiers {
 func ServeCustomer(cash *Cashier,cust *Customer,duration int,cashs *Cashiers){
 
 	fmt.Println(time.Now().Format("2006-01-02 15:04:05 "),"--> Cashier ",cash.CashierNo,": Customer ",cust.customerNo," Started")
-	time.Sleep(time.Duration(duration)*time.Second)
+	time.Sleep(time.Duration(duration)*time.Second)//Serving a Customer
 	cash.NoOfCustomerServed=cash.NoOfCustomerServed+1
 	fmt.Println(time.Now().Format("2006-01-02 15:04:05 "),"--> Cashier ",cash.CashierNo,": Customer ",cust.customerNo," Completed")
 	cashs.cashiers<-cash //Add Cashier into free list

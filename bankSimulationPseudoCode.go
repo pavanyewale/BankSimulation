@@ -3,14 +3,16 @@ Cashier{
 	CashierNO int
 	Occupied bool
 	NoOfCustomerServed int
-	WorkStartTime int
 }
 
+Cashiers{
+	chan Cashier  //as queue
+}
 Customer{
 	customerNo int
 }
-
-ServedCustomer{
+//it don't need so not implemented as records
+/*ServedCustomer{
 	customerNo int
 	cashierNO int
 	ServiceStartTime time
@@ -22,16 +24,15 @@ AllServedCustomers{
 }
 
 (AllServedCustomers) Add(ServedCustomer) bool
-
+*/
 UnservedCustomersQueue{
-	array{Customer}
-	NextCustomerNO int
+	chan Customer //as Queue
+	//NextCustomerNo int doesn't need it
 	TotalCustomers int
 }
 
 (UnservedCustomersQueue) Add(customer) bool
 (UnservedCustomersQueue) GetNextCustomer(customer) Customer
-
 
 interface BankHandler{
 
@@ -44,7 +45,8 @@ StartCashierWork(Cashier,UnservedCustomerQueue)
 
 func main(){
 	customers:=NewUnservedCustomerQueue(NoofCustomers)
+	cashiers:=getCashiers(NOofCashiers)
 	for i:=1;i<NoOfCashiers;i++{
-	go StartCashierWork(NewCashier(i),&customers)
+		go StartCashierWork(NewCashier(i),&customers)
 }
 }
